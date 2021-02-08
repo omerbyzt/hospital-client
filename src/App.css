@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+.loginCard {
+  margin-top: 10%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.customColumn {
+  width: 695px;
+  height: 975px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.overflow {
+  overflow-y: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.headerCss {
+  background-color: #34495E;
+  color : #ffffff;
+  height: 60px;
+  font-family: "Berlin Sans FB Demi";
 }
 
-.App-link {
-  color: #61dafb;
+.signOutBtn {
+  position: absolute;
+  right: 0.5%;
+  margin-top: 0.25%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timeButton {
+  width: 200px;
+  height: 50px;
+}
+
+.customCardHeight {
+  height: 925px;
+}
+
+.customTextFont {
+  font-family: "Bell MT";
+}
+
+.customModalButton {
+  width: 300px;
+  height: 50px;
+}
+
+.fullPageLoadingCss {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #F8F8F8AD;
+}
+
+.innerLoaderCss {
+  position: absolute;
+  left:43%;
+  top:20%;
+  z-index: 1000;
+}
+
+.successText {
+  margin-top: 5%;
+  margin-left: 36%;
+  font-family: "Bell MT";
+}
+
+.exitButton {
+  margin-top: 2%;
+  margin-left: 39%;
+  width: 20%;
+}
+
+.otherButton {
+  margin-top: 2%;
+  margin-left: 39%;
+  width: 20%;
+}
+
+.successTable {
+  margin-top: 20%;
+  margin-left: -3%;
+}
+
+.customTable {
+  margin-top: 3%;
+}
+
+.customPatientTableTitle {
+  font-family: "Bell MT";
+  margin-left: 40%;
+  margin-top: 5%;
 }
