@@ -5,13 +5,17 @@ import axios from 'axios';
 class PatientAppointments extends Component {
     state = {
         appointmentList : [],
-        patientId : 1
     }
     componentDidMount() {
-        axios.get('http://localhost:8080/appointment/' + this.state.patientId)
+        axios.get('http://localhost:8080/appointment/tc/' + localStorage.getItem("user_id"),
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
             .then(res => {
                 this.setState({appointmentList: res.data})
             });
+    }
+
+    logOut = () => {
+        this.props.history.push("/")
     }
 
     render() {
@@ -22,16 +26,16 @@ class PatientAppointments extends Component {
                     <h1 className="ml-2">Welcome to Hospital Appointment System
                         <button
                             className="btn btn-danger btn-lg signOutBtn"
-                            onClick={() => this.logOut()}>Log-out: {sessionStorage.getItem("user")}</button>
+                            onClick={() => this.logOut()}>Log-out: {localStorage.getItem("user")}</button>
                     </h1>
                 </div>
 
-                <h1 className="customPatientTableTitle">{sessionStorage.getItem("user")} Appointment List</h1>
+                <h1 className="customPatientTableTitle text-center">{localStorage.getItem("user")} Appointment List</h1>
                 <div className="container customTable">
                     <Table stripped>
                         <thead>
                         <tr>
-                            {/*<th>Hospital</th>*/}
+                            {/*<th className="customTextFont"><h3>Doctor</h3></th>*/}
                             <th className="customTextFont"><h3>Doctor</h3></th>
                             <th className="customTextFont"><h3>Appointment Date</h3></th>
                             <th className="customTextFont"><h3>Appointment Hour</h3></th>
@@ -43,7 +47,7 @@ class PatientAppointments extends Component {
                             appointmentList.map(v => {
                                 return(
                                     <tr>
-                                        {/*<th>Bakıcaz</th>*/}
+                                        {/*<th>{v.patient.name} {v.patient.surname}</th>*/}
                                         <th>{v.doctor.name} {v.doctor.surname}</th>
                                         <th>{v.date}</th>
                                         <th>{v.hour}</th>

@@ -54,12 +54,12 @@
 .innerLoaderCss {
   position: absolute;
   left:43%;
-  top:20%;
+  top:15%;
   z-index: 1000;
 }
 
 .successText {
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 36%;
   font-family: "Bell MT";
 }
@@ -87,6 +87,9 @@
 
 .customPatientTableTitle {
   font-family: "Bell MT";
-  margin-left: 40%;
   margin-top: 5%;
+}
+
+.otherAppointments {
+  margin-left: 47%;
 }

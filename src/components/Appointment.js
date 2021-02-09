@@ -26,18 +26,20 @@ class Appointment extends Component {
         showModal: false,
         doctorObj: "",
         hospitalObj: "",
-        showSuccess: false
+        showSuccess: false,
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/hospital')
+        axios.get('http://localhost:8080/hospital',
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
             .then(res => {
                 this.setState({hospitalList: res.data})
             });
     }
 
     getDoctorListByHospitalId = (e) => {
-        axios.get('http://localhost:8080/hospital/doctors/' + e.id)
+        axios.get('http://localhost:8080/hospital/doctors/' + e.id,
+        {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
             .then(res => {
                 this.setState({
                     doctorList: res.data,
@@ -97,7 +99,7 @@ class Appointment extends Component {
                 <Table>
                     <tbody>
                     <tr>
-                        <h4 className="ml-4 customTextFont"> Paitent : {sessionStorage.getItem("user")}</h4>
+                        <h4 className="ml-4 customTextFont"> Paitent : {localStorage.getItem("user")}</h4>
                     </tr>
                     <hr/>
                     <tr>
@@ -135,7 +137,8 @@ class Appointment extends Component {
         }
         console.log(selectedDate)
 
-        axios.post('http://localhost:8080/appointment', appointmentInf)
+        axios.post('http://localhost:8080/appointment', appointmentInf,
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
             .then(res => {
                 this.setState({reservedHours: res.data, isShowHours: true, selectedDate: selectedDate})
             });
@@ -221,8 +224,8 @@ class Appointment extends Component {
 
     addAppointment = () => {
         const newPatient = {
-            id: 1,
-            tc: "",
+            id: "",
+            tc: localStorage.getItem("user_id"),
             name: "",
             surname: "",
             age: "",
@@ -237,7 +240,8 @@ class Appointment extends Component {
             patient: newPatient
         }
 
-        axios.post('http://localhost:8080/appointment/add', newAppointment)
+        axios.post('http://localhost:8080/appointment/add', newAppointment,
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
 
         this.setState({
             showModal: false,
@@ -248,6 +252,10 @@ class Appointment extends Component {
         localStorage.setItem("date", this.state.selectedDate)
         localStorage.setItem("hour", this.state.selectedHour)
         this.props.history.push("/success")
+    }
+
+    goOtherAppointments = () => {
+        this.props.history.push("/patient-appointments")
     }
 
     render() {
@@ -273,8 +281,11 @@ class Appointment extends Component {
                 <div className="headerCss">
                     <h1 className="ml-2">Welcome to Hospital Appointment System
                         <button
+                            className="btn btn-info btn-lg otherAppointments mt-1"
+                            onClick={() => this.goOtherAppointments()}> Other Appointments </button>
+                        <button
                             className="btn btn-danger btn-lg signOutBtn"
-                            onClick={() => this.logOut()}>Log-out: {sessionStorage.getItem("user")}</button>
+                            onClick={() => this.logOut()}>Log-out: {localStorage.getItem("user")}</button>
                     </h1>
                 </div>
                 <Table bordered>

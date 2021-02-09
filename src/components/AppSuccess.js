@@ -10,6 +10,9 @@ class AppSuccess extends Component {
     goOtherAppointmentsPage = () => {
         this.props.history.push("/patient-appointments")
     }
+    goAppointmentsPage = () => {
+        this.props.history.push("/appointment")
+    }
 
     render() {
         return (
@@ -25,7 +28,7 @@ class AppSuccess extends Component {
                         <Table>
                             <tbody align="center">
                             <tr>
-                                <h3 className="ml-4 customTextFont"> Paitent : {sessionStorage.getItem("user")}</h3>
+                                <h3 className="ml-4 customTextFont"> Paitent : {localStorage.getItem("user")}</h3>
                             </tr>
                             <tr>
                                 <h3 className="ml-4 customTextFont mt-2">Hospital
@@ -47,7 +50,8 @@ class AppSuccess extends Component {
                         </Table>
                     </div>
                     <div>
-                        <button className="btn btn-info btn-lg otherButton" onClick={()=> {this.goOtherAppointmentsPage()}}> Other Appointments </button>
+                        <button className="btn btn-success btn-lg otherButton" onClick={()=> {this.goAppointmentsPage()}}> Appointment Page </button>
+                        <button className="btn btn-info btn-lg otherButton" onClick={()=> {this.goOtherAppointmentsPage()}}> Scheduled Appointments </button>
                         <button className="btn btn-danger btn-lg exitButton" onClick={()=> {this.logOut()}}> Exit</button>
                     </div>
                 </div>

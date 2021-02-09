@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
+import axios from 'axios';
 
 class Login extends Component {
     state = {
@@ -13,14 +14,26 @@ class Login extends Component {
         })
     }
 
-    login = () => {
-        if(this.state.id === "admin" && this.state.password === "pass3"){
-            this.props.history.push("/appointment")
-            sessionStorage.setItem("user",this.state.id)
+    login = (e) => {
+        let login = {
+            tc : this.state.id,
+            password: this.state.password
         }
-        else{
+        axios.post('http://localhost:8080/authenticate', login)
+            .then(res => {
+                localStorage.setItem("token",res.data)
+                localStorage.setItem("user_id",this.state.id)
+                this.props.history.push("/appointment")
+            }).catch(()=> {
             window.alert("USERNAME OR PASSWORD WRONG!")
-        }
+        });
+
+        axios.get('http://localhost:8080/patient/tc/'+ this.state.id,
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
+            .then(res => {
+                localStorage.setItem("user", res.data.name + " " + res.data.surname)
+            });
+        e.preventDefault();
     }
 
     render() {
