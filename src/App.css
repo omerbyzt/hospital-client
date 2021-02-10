@@ -90,6 +90,13 @@
   margin-top: 5%;
 }
 
-.otherAppointments {
-  margin-left: 47%;
+.otherAppointments{
+  font-family: "Bell MT";
+  font-size: 30px;
+  color: cornflowerblue;
+  text-decoration-line: underline;
+}
+
+.otherAppointments:hover{
+  color: white;
 }

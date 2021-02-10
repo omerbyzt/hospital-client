@@ -51,7 +51,7 @@ class AppSuccess extends Component {
                     </div>
                     <div>
                         <button className="btn btn-success btn-lg otherButton" onClick={()=> {this.goAppointmentsPage()}}> Appointment Page </button>
-                        <button className="btn btn-info btn-lg otherButton" onClick={()=> {this.goOtherAppointmentsPage()}}> Scheduled Appointments </button>
+                        <button className="btn btn-info btn-lg otherButton" onClick={()=> {this.goOtherAppointmentsPage()}}> My Appointments </button>
                         <button className="btn btn-danger btn-lg exitButton" onClick={()=> {this.logOut()}}> Exit</button>
                     </div>
                 </div>

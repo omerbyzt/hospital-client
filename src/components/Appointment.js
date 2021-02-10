@@ -147,8 +147,16 @@ class Appointment extends Component {
     showHours = () => {
         if (this.state.isShowHours) {
             let buttonArray = []
+            // let date = new Date()
+            let date = new Date("Wed Feb 10 2021 13:13:40 GMT+0300 (GMT+03:00)")
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            let currentDate = monthNames[date.getMonth()] + " " + date.getUTCDate() + " " + date.getFullYear()
+            console.log("bugün : " + date)
+            console.log("current  : " + currentDate)
+            console.log("selected : " + this.state.selectedDate)
+
             for (let i = 8; i < 17; i++) {
-                if (this.state.reservedHours.includes(i) || i == 12) {
+                if (this.state.reservedHours.includes(i) || i == 12 || (currentDate == this.state.selectedDate && date.getHours() >= i)) {
                     buttonArray.push(
                         <button className="btn btn-danger timeButton ml-3 mt-3" disabled>{i}:00 - {i + 1}:00</button>
                     )
@@ -229,7 +237,7 @@ class Appointment extends Component {
             name: "",
             surname: "",
             age: "",
-            gender: ""
+            gender: "",
         }
 
         const newAppointment = {
@@ -237,7 +245,8 @@ class Appointment extends Component {
             date: this.state.selectedDate,
             hour: this.state.selectedHourLong,
             doctor: this.state.doctorObj,
-            patient: newPatient
+            patient: newPatient,
+            status: 0
         }
 
         axios.post('http://localhost:8080/appointment/add', newAppointment,
@@ -281,8 +290,8 @@ class Appointment extends Component {
                 <div className="headerCss">
                     <h1 className="ml-2">Welcome to Hospital Appointment System
                         <button
-                            className="btn btn-info btn-lg otherAppointments mt-1"
-                            onClick={() => this.goOtherAppointments()}> Other Appointments </button>
+                            className="btn btn-link btn-lg otherAppointments ml-5"
+                            onClick={() => this.goOtherAppointments()}> My Appointments </button>
                         <button
                             className="btn btn-danger btn-lg signOutBtn"
                             onClick={() => this.logOut()}>Log-out: {localStorage.getItem("user")}</button>

@@ -33,6 +33,9 @@ class Login extends Component {
             .then(res => {
                 localStorage.setItem("user", res.data.name + " " + res.data.surname)
             });
+
+        axios.get('http://localhost:8080/appointment/check',
+            {headers : {Authorization: "Bearer " + localStorage.getItem("token")}})
         e.preventDefault();
     }
 
